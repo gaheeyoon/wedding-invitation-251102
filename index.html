@@ -2,6 +2,7 @@
 <html lang="ko">
     <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <meta http-equiv="Content-Script-Type" content="text/javascript">
@@ -41,9 +42,7 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Malgun Gothic', '맑은 고딕', sans-serif;
-            display: flex;
             background-color: rgb(238, 238, 238);
-            justify-content: center;
             min-height: 100vh;
         }
 
@@ -53,35 +52,40 @@
             background-color: white;
             min-height: 100vh;
             position: relative;
+            margin: 0 auto;
         }
 
         .content {
-            padding: 0;
-            padding-bottom: 80px; /* 플로팅 버튼 공간 확보 */
+            width: 100%;
+            padding-bottom: 100px; /* 플로팅 버튼 공간 확보 */
         }
 
         .content img {
             width: 100%;
+            height: auto;
+            display: block;
         }
 
         /* 플로팅 버튼 */
         .floating-button {
             position: fixed;
-            bottom: 20px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(135deg, #4CAF50 0%, #2E8B57 100%);
             color: white;
             border: none;
-            padding: 15px 25px;
+            padding: 18px 30px;
             border-radius: 50px;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 600;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 1000;
             white-space: nowrap;
+            min-width: 200px;
+            text-align: center;
         }
 
         .floating-button:hover {
@@ -223,21 +227,48 @@
             opacity: 1;
         }
 
-        /* 반응형 설정 */
-        @media (max-width: 640px) {
+        /* 모바일 우선 반응형 설정 */
+        @media (max-width: 768px) {
+            body {
+                background-color: white; /* 모바일에서는 배경을 흰색으로 */
+            }
+            
+            .container {
+                max-width: 100%;
+                margin: 0;
+            }
+            
             .content {
-                padding: 15px;
-                padding-bottom: 80px;
+                padding: 0;
+                padding-bottom: 120px;
             }
             
             .floating-button {
-                bottom: 15px;
-                padding: 12px 20px;
-                font-size: 15px;
+                bottom: 20px;
+                padding: 20px 35px;
+                font-size: 19px;
+                font-weight: 700;
+                min-width: 220px;
+                border-radius: 60px;
             }
         }
 
-        @media (min-width: 641px) {
+        /* 작은 모바일 화면 (아이폰 SE 등) */
+        @media (max-width: 375px) {
+            .floating-button {
+                padding: 18px 30px;
+                font-size: 17px;
+                min-width: 200px;
+            }
+        }
+
+        /* 데스크톱/태블릿 */
+        @media (min-width: 769px) {
+            body {
+                display: flex;
+                justify-content: center;
+            }
+            
             .container {
                 margin: 0;
             }
